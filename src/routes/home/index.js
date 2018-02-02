@@ -3,24 +3,28 @@ import { connect } from 'preact-redux';
 import style from './style';
 import * as actions from '../../actions'
 import reduce from '../../reducers';
-import ColorPicker from '../../components/colorpicker';
+
+import ColorPicker from '../../components/ColorPicker';
+import TimePicker from '../../components/TimePicker';
 
 @connect(reduce, actions)
 export default class Home extends Component {
 
-    setOuterColor = (data) => {
-        this.props.setOuterColor(data)
-    };
+    setOuterColor (color) {
+        this.props.setOuterColor(color)
+    }
 
-    setInnerColor = (data) => {
-        this.props.setInnerColor(data)
-    };
+    setTime (date) {
+
+    }
 
     render() {
         return (
             <div class={style.home}>
 
-                <ColorPicker text="Outer color" onChange={this.setOuterColor} />
+                <TimePicker onChange={e => this.setTime(e)} />
+
+                <ColorPicker text="Outer color" onChange={e => this.setOuterColor(e)} />
 
             </div>
         );

@@ -1,0 +1,131 @@
+.time-selector {
+    box-sizing: border-box;
+    width: 50vw;
+    height: 50vw;
+    position: relative;
+    margin: 2rem 0;
+    user-select: none;
+
+    --minuteRotation: -60deg;
+    --hourRotation: 60deg;
+
+    @media (max-width:480px) {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    &__minute,
+    &__hour {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+
+        box-sizing: border-box;
+        border: none;
+        border-radius: 50%;
+        user-select: none;
+        overflow: hidden;
+        cursor: pointer;
+        backface-visibility: hidden;
+
+        div {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 20%;
+            width: 20%;
+        }
+    }
+
+    &__minute {
+        z-index: 1;
+        transform: translate(-50%, -50%)  rotate(var(--minuteRotation));
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        clip-path: circle(48% at 50% 50%);
+
+        div {
+            right: 2%;
+        }
+    }
+
+    &__hour {
+        z-index: 5;
+        transform: translate(-50%, -50%) rotate(var(--hourRotation));
+        width: 80%;
+        height: 80%;
+        clip-path: circle(50% at 50% 50%);
+        background: #222;
+        border: 1px solid #fff;
+
+        div {
+            right: -10%;
+        }
+    }
+
+    &__input {
+        z-index: 11;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 60%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: #222;
+        clip-path: circle(50% at 50% 50%);
+
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        grid-template-rows: 35%;
+        grid-template-columns: 35% 35%;
+        grid-column-gap: 20px;
+
+        input, span {
+            color: #fff;
+            font-family: monospace;
+            opacity: .6;
+            font-size: 4em;
+        }
+
+        input {
+            background-color: #222;
+            border: 1px solid #fff;
+            border-left: none;
+            border-right: none;
+
+
+            padding: 0.5rem;
+
+
+
+
+            &:first-child {
+                text-align: right;
+                padding-right: 0;
+            }
+            &:last-child {
+                padding-left: 0;
+            }
+
+            &:focus {
+                opacity: 1;
+                outline: none;
+            }
+        }
+
+        span {
+            position: absolute;
+            text-align: center;
+            display: block;
+            height: 4%;
+            line-height: 0;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%)
+        }
+    }
+}

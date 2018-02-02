@@ -66,7 +66,7 @@ export const getHue = function (angle) {
     }
     hue = 360 - hue
 
-    return hue
+    return Math.floor(hue)
 }
 
 /**
