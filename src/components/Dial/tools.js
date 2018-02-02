@@ -80,7 +80,7 @@ export const getTouchAngle = function (event, callback) {
  * @param {Number} angle
  * @returns {Number}
  */
-export const getHue = function (angle) {
+export const rotateAngle90 = function (angle) {
     let hue = 360 + (angle + 90)
 
     if (hue > 360) {

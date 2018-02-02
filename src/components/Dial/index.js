@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import style from './style';
-import { getTouchAngle } from './tools'
+import { getTouchAngle, rotateAngle90 } from './tools'
 
 export default class Dial extends Component {
 
@@ -20,7 +20,7 @@ export default class Dial extends Component {
             const angleDiff = touchAngle - grabAngle
             const angle = -1 * (setAngle + angleDiff)
 
-            this.props.onChange(angle)
+            this.props.onChange(rotateAngle90(angle))
 
             callback(angle)
         })

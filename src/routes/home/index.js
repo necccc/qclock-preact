@@ -25,12 +25,10 @@ class H extends Component {
     }
 
     setTime (time) {
-        console.log('time', time);
         this.props.setTime(new Date(time))
     }
 
     render({outerColor, time}, state) {
-        console.log(outerColor);
         return (
             <div class={style.home}>
                 <TimePicker onChange={e => this.setTime(e)} time={time} outerColor={outerColor} />
