@@ -41,8 +41,8 @@ const isTouchEvent = function (event) {
 
 /**
  *
- * 
- * @param {any} radians 
+ *
+ * @param {any} radians
  * @returns
  */
 export const deg = function(radians) {

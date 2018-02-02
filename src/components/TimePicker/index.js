@@ -1,37 +1,57 @@
 import { h, Component } from 'preact';
 import moment from 'moment'
 import { connect } from 'preact-redux';
+import Dial from '../Dial'
 import * as actions from '../../actions'
 import reduce from '../../reducers';
 import style from './style';
 
-const mapStateToProps = (state, ownProps) => {
 
-    const minuteColor = state.outerColor || 'hsl(289, 100%, 50%)';
-    const time = state.time
 
-    return {
-        minuteColor,
-        time
+/**
+ *
+ *
+ * @param {Number} angle
+ * @returns {Number}
+ */
+export const getHue = function (angle) {
+    let hue = 360 + (angle + 90)
+
+    if (hue > 360) {
+        hue = 360 - hue
     }
+    if (hue < 0) {
+        hue = -1 * hue
+    }
+    hue = 360 - hue
+
+    return Math.floor(hue)
 }
 
-class TimePickerBase extends Component {
 
-    componentWillMount() {
-        this.setState({
-        })
+export default class TimePicker extends Component {
+
+    onMinuteDial(e){
+        const rotated = getHue(e)
+        const minutes = 59 - Math.floor( (rotated /  (360 / 59) ))
+        this.props.onChange(this.props.time.setMinutes(minutes))
     }
 
-    render({minuteColor, time}, state) {
+    onHourDial(e) {
+        const rotated = getHue(e)
+        const hours = 12 - Math.floor( (rotated /  (360 / 12) ))
+        this.props.onChange(this.props.time.setHours(hours-1))
+    }
 
-// outer rim minutes, dial
-// inner rim, hours, dial
-// center: numeric input
-// use colors from clockface
-console.log(time);
+    render({outerColor, time}, state) {
 
-        const minuteBg = `background-image: radial-gradient(${minuteColor} 10%, transparent 70%);`
+        // outer rim minutes, dial
+        // inner rim, hours, dial
+        // center: numeric input
+        // use colors from clockface
+        console.log(time);
+
+        const minuteColor = `background-image: radial-gradient(${outerColor} 10%, transparent 70%);`
         const hourColor = `background-image: radial-gradient(hsl(180, 100%, 50%) 10%, transparent 70%);`
 
         const hour = moment(time).format('HH')
@@ -44,19 +64,13 @@ console.log(time);
                     <span>:</span>
                     <input type="text" min="0" max="59" steps="1" value={minute} />
                 </div>
-                <div class={style['time-selector__minute']}>
-                    <div style={minuteBg}></div>
-                </div>
-                <div class={style['time-selector__hour']}>
+                <Dial className={style['time-selector__minute']} onChange={e => this.onMinuteDial(e)}>
+                    <div style={minuteColor}></div>
+                </Dial>
+                <Dial className={style['time-selector__hour']} onChange={e => this.onHourDial(e)}>
                     <div style={hourColor}></div>
-                </div>
+                </Dial>
             </div>
         );
     }
 }
-
-
-
-const TimePicker = connect(mapStateToProps)(TimePickerBase)
-
-export default TimePicker

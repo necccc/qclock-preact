@@ -6,8 +6,8 @@ import {
 
 
 const initialState = {
-    outerColor: '',
-    innerColor: '',
+    outerColor: 'hsl(270, 100%, 50%)',
+    innerColor: 'hsl(180, 100%, 50%)',
     time: new Date()
 }
 
