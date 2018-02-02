@@ -93,3 +93,25 @@ export const rotateAngle90 = function (angle) {
 
     return Math.floor(hue)
 }
+
+
+export const rotateAngle90Back = function (angle) {
+
+    let hue = 360 - (angle - 90)
+
+
+
+
+    if (hue > 360) {
+        hue = 360 - hue
+    }
+
+    console.log(hue);
+
+    if (hue < 0) {
+        hue = -1 * hue
+    }
+    hue = 360 - hue
+
+    return Math.floor(hue)
+}

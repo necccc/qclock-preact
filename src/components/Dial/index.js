@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import style from './style';
-import { getTouchAngle, rotateAngle90 } from './tools'
+import { getTouchAngle, rotateAngle90, rotateAngle90Back } from './tools'
+import { fail } from 'assert';
 
 export default class Dial extends Component {
 
@@ -14,7 +15,19 @@ export default class Dial extends Component {
         this.container.style.setProperty(`--dialRotation`, '0deg')
     }
 
-    updateAngle(event, callback) {
+    shouldComponentUpdate({value}, nextState) {
+
+        const oldValue = this.props.value;
+
+        if (oldValue !== value) {
+            this.setAngle(rotateAngle90Back(value))
+            return false;
+        }
+
+        return true;
+    }
+
+    getNewAngle(event, callback) {
         getTouchAngle(event, (touchAngle) => {
             const { grabAngle, setAngle } = this.state
             const angleDiff = touchAngle - grabAngle
@@ -26,17 +39,19 @@ export default class Dial extends Component {
         })
     }
 
+    setAngle(angle) {
+        this.setState({
+            angle
+        })
+        this.container.style.setProperty(`--dialRotation`, (angle) + 'deg')
+    }
+
     selecting (event) {
         event.preventDefault()
 
         if (!this.state.selecting) return
 
-        this.updateAngle(event, (angle) => {
-            this.setState({
-                angle: angle
-            })
-            this.container.style.setProperty(`--dialRotation`, (angle) + 'deg')
-        })
+        this.getNewAngle(event, angle => this.setAngle(angle))
     }
 
     selectStart (e) {
@@ -51,7 +66,7 @@ export default class Dial extends Component {
 
     selectEnd (e) {
         e.preventDefault()
-        this.updateAngle(event, (angle) => {
+        this.getNewAngle(event, (angle) => {
             const setAngle = -1 * angle
             this.setState({
                 setAngle,
