@@ -6,6 +6,7 @@
     position: relative;
     margin: 2rem 0;
     user-select: none;
+    overflow: hidden;
     --hue: 0;
 
     @media (max-width:480px) {

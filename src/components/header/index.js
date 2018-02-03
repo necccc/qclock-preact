@@ -10,24 +10,29 @@ import reduce from '../../reducers';
 
 const mapStateToProps = (state, ownProps) => {
 
-    const bgColor = state.outerColor || ownProps.bgColor;
+    const outerColor = state.outerColor;
+    const innerColor = state.innerColor;
     const time = state.time
 
     return {
-        bgColor,
+        outerColor,
+        innerColor,
         time
     }
 }
 
 class BaseHeader extends Component {
     render() {
-        const headerStyle = `background-color: ${this.props.bgColor}`
-        const time = moment(this.props.time).format('HH:mm')
+        const headerStyle = `
+            background-image:
+            radial-gradient(ellipse at center bottom, hsla(0,0%,13%,0) 0%, hsla(0,0%,13%,.5) 54%, hsla(0,0%,13%,.9)),
+            linear-gradient(to right, ${this.props.outerColor}, ${this.props.innerColor})`
 
         return (
             <header class={style.header} style={headerStyle}>
-                <h1>colorpicker {time}</h1>
                 <nav>
+                    <Link href="/">Time</Link>
+                    <Link href="/design">Design</Link>
                 </nav>
             </header>
         );

@@ -1,0 +1,55 @@
+@import './font.scss';
+
+html, body {
+    min-height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: #222;
+    font-family: 'Julius Sans One';
+    font-weight: 400;
+    font-size: 16px;
+    color: #ddd;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#outer,
+#app {
+    min-height: 100vh;
+}
+
+#Q {
+    display: block;
+    position: fixed;
+    z-index: 100;
+    margin: 0;
+    width: 4rem;
+    height: 4rem;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 2.4rem;
+    line-height: 4rem;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.page {
+    height: calc(100vh - 4rem);
+    padding-top: 8rem;
+    display: grid;
+    justify-content: center;
+    grid-gap: 2rem;
+
+
+    @media (max-width:480px) {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+}

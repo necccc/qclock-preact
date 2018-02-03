@@ -62,9 +62,9 @@ export default class TimePicker extends Component {
         this.props.onChange(time)
     }
 
-    render({outerColor, time}, {minuteSelecting, hourSelecting}) {
+    render({ outerColor, innerColor, time }, { minuteSelecting, hourSelecting }) {
         const minuteColor = `background-image: radial-gradient(${outerColor} 10%, transparent 70%);`
-        const hourColor = `background-image: radial-gradient(hsl(180, 100%, 50%) 10%, transparent 70%);`
+        const hourColor = `background-image: radial-gradient(${innerColor} 10%, transparent 70%);`
 
         const minuteDial = minutesToDegrees(time.getMinutes())
         const hourDial = hoursToDegrees(time.getHours())

@@ -2,8 +2,8 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 
 import Header from './Header';
-import Home from '../routes/home';
-import Profile from '../routes/profile';
+import Time from '../routes/time';
+import Design from '../routes/design';
 
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
@@ -22,7 +22,8 @@ export default class App extends Component {
             <div id="app">
                 <Header bgColor="#673AB7" />
                 <Router onChange={this.handleRoute}>
-                    <Home path="/" />
+                    <Time path="/" />
+                    <Design path="/design" />
                 </Router>
             </div>
         );

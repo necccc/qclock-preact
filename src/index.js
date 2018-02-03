@@ -10,6 +10,7 @@ let store = createStore(app)
 
 export default () => (
     <div id="outer">
+        <h1 id="Q">Q</h1>
         <Provider store={store}>
             <App />
         </Provider>
