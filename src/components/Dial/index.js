@@ -11,11 +11,14 @@ export default class Dial extends Component {
             setAngle: 0
         })
     }
+
     componentDidMount() {
         this.container.style.setProperty(`--dialRotation`, '0deg')
     }
 
-    shouldComponentUpdate({value}, nextState) {
+    shouldComponentUpdate({value, preventSelect}, nextState) {
+
+        if (this.state.selecting) return
 
         const oldValue = this.props.value;
 
@@ -29,6 +32,11 @@ export default class Dial extends Component {
 
     getNewAngle(event, callback) {
         getTouchAngle(event, (touchAngle) => {
+
+
+            console.log('getTouchAngle', touchAngle);
+
+
             const { grabAngle, setAngle } = this.state
             const angleDiff = touchAngle - grabAngle
             const angle = -1 * (setAngle + angleDiff)
@@ -40,9 +48,12 @@ export default class Dial extends Component {
     }
 
     setAngle(angle) {
+        if (angle === this.state.angle) return;
+
         this.setState({
             angle
         })
+
         this.container.style.setProperty(`--dialRotation`, (angle) + 'deg')
     }
 
@@ -68,6 +79,7 @@ export default class Dial extends Component {
         e.preventDefault()
         this.getNewAngle(event, (angle) => {
             const setAngle = -1 * angle
+
             this.setState({
                 setAngle,
                 selecting: false
@@ -79,7 +91,7 @@ export default class Dial extends Component {
         const className = [props.className, style['dial']].join(' ')
 
         return <div
-            ref={(element) => { this.container = element; }}
+            ref={(element) => { this.container = element }}
             class={className}
             onMouseDown={e => this.selectStart(e)}
             onTouchStart={e => this.selectStart(e)}

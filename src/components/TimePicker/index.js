@@ -9,11 +9,11 @@ import style from './style';
 import TimeInput from './TimeInput'
 
 const degreesToMinutes = (deg) => {
-    return (60 - Math.floor( (deg / (360 / 60) ))) - 1
+    return Math.floor( (deg / (360 / 60) ))
 }
 
 const degreesToHours = (deg) => {
-    return (12 - Math.floor( (deg / (360 / 12) ))) - 1
+    return Math.floor( (deg / (360 / 12) ))
 }
 
 const minutesToDegrees = (minutes) => {
@@ -26,21 +26,43 @@ const hoursToDegrees = (hours) => {
 
 export default class TimePicker extends Component {
 
+    componentWillMount () {
+        this.setState({
+            time: this.props.time
+        })
+    }
+
     onMinuteDial(deg){
         const minutes = degreesToMinutes(deg)
-        this.props.onChange(this.props.time.setMinutes(minutes))
+        const time = new Date(this.state.time)
+
+        time.setMinutes(minutes)
+
+        this.setState({
+            time
+        })
+
+        this.props.onChange(time)
     }
 
     onHourDial(deg) {
         const hours = degreesToHours(deg)
-        this.props.onChange(this.props.time.setHours(hours))
+        const time = new Date(this.state.time)
+
+        time.setHours(hours)
+
+        this.setState({
+            time
+        })
+
+        this.props.onChange(time)
     }
 
     onTimeChange(time) {
         this.props.onChange(time)
     }
 
-    render({outerColor, time}, state) {
+    render({outerColor, time}, {minuteSelecting, hourSelecting}) {
         const minuteColor = `background-image: radial-gradient(${outerColor} 10%, transparent 70%);`
         const hourColor = `background-image: radial-gradient(hsl(180, 100%, 50%) 10%, transparent 70%);`
 
@@ -50,10 +72,18 @@ export default class TimePicker extends Component {
         return (
             <div class={style['time-selector']}>
                 <TimeInput time={time} onChange={ e => this.onTimeChange(e) } />
-                <Dial className={style['time-selector__minute']} value={minuteDial} onChange={ e => this.onMinuteDial(e) }>
+                <Dial
+                    className={style['time-selector__minute']}
+                    value={minuteDial}
+                    onChange={ e => this.onMinuteDial(e) }
+                >
                     <div style={minuteColor}></div>
                 </Dial>
-                <Dial className={style['time-selector__hour']} value={hourDial} onChange={ e => this.onHourDial(e) }>
+                <Dial
+                    className={style['time-selector__hour']}
+                    value={hourDial}
+                    onChange={ e => this.onHourDial(e) }
+                >
                     <div style={hourColor}></div>
                 </Dial>
             </div>

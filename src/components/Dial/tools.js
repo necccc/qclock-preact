@@ -43,6 +43,9 @@ export const calculateTouchAngle = function ({left, top, width, height, pageX, p
         angle = 360 + angle
     }
 
+    console.log('calculateTouchAngle', angle);
+
+
     return angle
 }
 
@@ -81,37 +84,47 @@ export const getTouchAngle = function (event, callback) {
  * @returns {Number}
  */
 export const rotateAngle90 = function (angle) {
-    let hue = 360 + (angle + 90)
+    console.log('rotateAngle90 in' , angle);
 
-    if (hue > 360) {
-        hue = 360 - hue
+    if (angle < 0) {
+        angle = 360 + angle;
     }
-    if (hue < 0) {
-        hue = -1 * hue
-    }
-    hue = 360 - hue
 
-    return Math.floor(hue)
+    let rotated = angle + 90
+
+    if (rotated > 360) {
+        rotated = rotated - 360
+    }
+    if (rotated < 0) {
+        rotated = 360 + rotated
+    }
+
+    console.log('rotateAngle90 out' , rotated);
+
+    return Math.floor(rotated)
 }
 
-
+/**
+ *
+ * 
+ * @param {any} angle
+ * @returns 
+ */
 export const rotateAngle90Back = function (angle) {
-
-    let hue = 360 - (angle - 90)
-
-
-
-
-    if (hue > 360) {
-        hue = 360 - hue
+    if (angle < 0) {
+        angle = 360 + angle;
     }
 
-    console.log(hue);
+    let rotated = angle - 90
 
-    if (hue < 0) {
-        hue = -1 * hue
+    if (rotated > 360) {
+        rotated = rotated - 360
     }
-    hue = 360 - hue
+    if (rotated < 0) {
+        rotated = 360 + rotated
+    }
 
-    return Math.floor(hue)
+    console.log('rotateAngle90 out' , rotated);
+
+    return Math.floor(rotated)
 }
