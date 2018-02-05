@@ -31,7 +31,6 @@ export default class DialPage extends Component {
     }
 
     render(props, {vertical, horizontal, val}) {
-
         const test = 'foo'
         return (
             <div class="page">
@@ -44,7 +43,7 @@ export default class DialPage extends Component {
                 </div>
 
                 <div class={style['horizontal-slider-test']} >
-                    {vertical, horizontal}
+                    { horizontal}
                     <HorizontalSlider onChange={e => this.setHorizontal(e)} value={val} >
                         <div class={style['horizontal-slider-test__in']} ></div>
                     </HorizontalSlider>
