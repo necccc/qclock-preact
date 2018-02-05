@@ -60,7 +60,7 @@ export default class Saturation extends Component {
         const gradient = `background-image: linear-gradient(hsl(${hue}, 100%, 50%), hsl(${hue}, 0%, 50%));`
         const level = `transform: translateY(${saturation}px);`
         return <div
-                    class={style['spectrum-selector__saturation']}
+                    class={style['colorpicker__saturation']}
                     style={gradient}
                     onClick={e => this.clicked(e)}
                     onMouseDown={e => this.selectStart(e)}
@@ -70,7 +70,7 @@ export default class Saturation extends Component {
                     onMouseUp={e => this.selectEnd(e)}
                     onTouchEnd={e => this.selectEnd(e)}
                 >
-                    <div class={style['spectrum-selector__saturation-level']} style={level}></div>
+                    <div class={style['colorpicker__saturation-level']} style={level}></div>
                 </div>
     }
 }

@@ -4,6 +4,7 @@ import { Router } from 'preact-router';
 import Header from './Header';
 import Time from '../routes/time';
 import Design from '../routes/design';
+import DialPage from '../routes/dial';
 
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
@@ -24,6 +25,7 @@ export default class App extends Component {
                 <Router onChange={this.handleRoute}>
                     <Time path="/" />
                     <Design path="/design" />
+                    <DialPage path="/dial" />
                 </Router>
             </div>
         );

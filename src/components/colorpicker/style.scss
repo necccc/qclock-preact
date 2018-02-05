@@ -1,13 +1,15 @@
 
-.spectrum-selector {
+.colorpicker {
     box-sizing: border-box;
     width: 50vw;
     height: 50vw;
+    max-width: 600px;
+    max-height: 600px;
+
     position: relative;
     margin: 2rem 0;
     user-select: none;
     overflow: hidden;
-    --hue: 0;
 
     @media (max-width:480px) {
         width: 90vw;
@@ -29,119 +31,112 @@
         cursor: normal;
     }
 
-    .spectrum-container {
+    .spectrum {
         position: absolute;
         width: 100%;
         height: 100%;
         z-index: 10;
         user-select: none;
-        --wheelRotation: 0deg;
-    }
 
-    .spectrum-circle {
-
-        position: absolute;
-        z-index: 2;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) rotate(var(--wheelRotation));
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        border: none;
-        border-radius: 50%;
-        user-select: none;
-        clip-path: circle(48% at 50% 50%);
-        overflow: hidden;
-        cursor: pointer;
-
-        backface-visibility: hidden;
-
-        &::after {
+        &__selector {
             position: absolute;
-
+            z-index: 3;
             left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-            box-sizing: border-box;
-            width: 80%;
+            transform: translate(-50%, -67%);
+            transform-origin: bottom center;
+            width: 4%;
             height: 80%;
-            background: #222;
-            border-radius: 50%;
-            content: '';
-            cursor: normal;
+            background: linear-gradient(
+                to right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0) 44%,
+                rgba(255,255,255,1) 50%,
+                rgba(255,255,255,0) 52%,
+                rgba(0,0,0,1) 53%,
+                rgba(255,255,255,0) 55%,
+                rgba(255,255,255,0) 100%
+            );
         }
 
-        &__color {
-            height: 30%;
-            width: 60%;
-            border: none;
-            position: absolute;
-            z-index: 3;
-            left: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            transform-origin: left center;
+        .spectrum-circle {
+            clip-path: circle(50% at 50% 50%); // override dial's
+
+            &__inner {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                clip-path: circle(48% at 50% 50%);
+            }
+    
+            &::after {
+                position: absolute;
+    
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 3;
+                box-sizing: border-box;
+                width: 80%;
+                height: 80%;
+                background: #222;
+                border-radius: 50%;
+                content: '';
+                cursor: normal;
+            }
+    
+            &__color {
+                height: 30%;
+                width: 60%;
+                border: none;
+                position: absolute;
+                z-index: 3;
+                left: 50%;
+                top: 50%;
+                transform: translateY(-50%);
+                transform-origin: left center;
+            }
+    
+            &__decoration {
+                position: absolute;
+                z-index: 1;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+    
+                width: 110%;
+                height: 110%;
+
+                &--mark,
+                &--secondary,
+                &--primary {
+                    width: 90%;
+                    height: 1px;
+                    background: #fff;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    box-sizing: border-box;
+                }
+    
+                &--secondary {
+                    width: 91%;
+    
+                }
+                &--primary {
+                    width: 92%;
+                }
+            }
         }
+
     }
 
 
-    &__color {
-        position: absolute;
-        z-index: 3;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -67%);
-        transform-origin: bottom center;
-        width: 4%;
-        height: 80%;
-        background: linear-gradient(
-            to right, 
-            rgba(255,255,255,0) 0%,
-            rgba(255,255,255,0) 44%,
-            rgba(255,255,255,1) 50%,
-            rgba(255,255,255,0) 52%,
-            rgba(0,0,0,1) 53%,
-            rgba(255,255,255,0) 55%,
-            rgba(255,255,255,0) 100%
-        );
-    }
 
-    &__decoration {
-        position: absolute;
-        z-index: 1;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) rotate(var(--wheelRotation));
-
-        width: 110%;
-        height: 110%;
-
-        //background: #dedede;
-        clip-path: circle(48% at 50% 50%);
-
-
-        &--mark,
-        &--secondary,
-        &--primary {
-            width: 90%;
-            height: 1px;
-            background: #fff;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            box-sizing: border-box;
-        }
-
-        &--secondary {
-            width: 91%;
-
-        }
-        &--primary {
-            width: 92%;
-        }
-    }
 
     &__luminosity,
     &__saturation {
@@ -176,7 +171,7 @@
     &__saturation-level {
         position: absolute;
         z-index: 3;
-    
+
         width: 100%;
         height: 0;
         padding-bottom: 100%;

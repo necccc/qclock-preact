@@ -11,16 +11,18 @@ const colors = (new Array(64)).fill(0)
 export default class ColorPicker extends Component {
 
     componentWillMount() {
+        const [ hue, saturation, luminosity ] = this.props.value
+
         this.setState({
-            hue: -90,
-            saturation: 100,
-            luminosity: 50
+            hue,
+            saturation,
+            luminosity
         })
     }
 
     updateColor () {
         const { hue, saturation, luminosity } = this.state
-        this.props.onChange(`hsl(${hue}, ${saturation}%, ${luminosity}%)`)
+        this.props.onChange([hue, saturation, luminosity])
     }
 
     onHueChange(hue) {
@@ -46,8 +48,8 @@ export default class ColorPicker extends Component {
 
     render(props, {hue}) {
         return (
-            <div class={style['spectrum-selector']}>
-                <Spectrum onChange={e => this.onHueChange(e)} />
+            <div class={style['colorpicker']}>
+                <Spectrum hue={hue} onChange={e => this.onHueChange(e)} />
                 <Saturation hue={hue} onChange={e => this.onSaturationChange(e)} />
                 <Luminosity hue={hue} onChange={e => this.onLuminosityChange(e)} />
             </div>

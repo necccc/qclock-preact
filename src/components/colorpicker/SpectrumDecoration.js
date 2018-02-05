@@ -12,15 +12,15 @@ export default class SpectrumDecoration extends Component {
     }
 
     render(props, {stops}) {
-        return <div class={style['spectrum-selector__decoration']} >
+        return <div class={style['spectrum-circle__decoration']} >
                 {stops.map((angle, index, stops) => {
 
-                    let className = 'spectrum-selector__decoration--mark'
+                    let className = 'spectrum-circle__decoration--mark'
 
                     if (index % 4 === 0) {
-                        className = 'spectrum-selector__decoration--primary';
+                        className = 'spectrum-circle__decoration--primary';
                     } else if (index % 2 === 0) {
-                        className = 'spectrum-selector__decoration--secondary';
+                        className = 'spectrum-circle__decoration--secondary';
                     }
 
                     const rotate = index * (45/2)

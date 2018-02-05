@@ -60,7 +60,7 @@ export default class Luminosity extends Component {
         const gradient = `background-image: linear-gradient(hsl(${hue}, 100%, 100%), hsl(${hue}, 100%, 0%));`
         const level = `transform: translateY(${luminosity}px);`
         return <div
-                    class={style['spectrum-selector__luminosity']}
+                    class={style['colorpicker__luminosity']}
                     style={gradient}
                     onClick={e => this.clicked(e)}
                     onMouseDown={e => this.selectStart(e)}
@@ -70,7 +70,7 @@ export default class Luminosity extends Component {
                     onMouseUp={e => this.selectEnd(e)}
                     onTouchEnd={e => this.selectEnd(e)}
                 >
-                    <div class={style['spectrum-selector__luminosity-level']} style={level}></div>
+                    <div class={style['colorpicker__luminosity-level']} style={level}></div>
                 </div>
     }
 }

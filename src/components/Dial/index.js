@@ -6,19 +6,34 @@ import { fail } from 'assert';
 export default class Dial extends Component {
 
     componentWillMount () {
+        const { value } = this.props
+
+        let startAngle = 0
+        let setAngle = 0
+        let angle = 0
+
+        if (typeof value === 'number') {
+            angle = rotateAngle90Back(value)
+        }
+
         this.setState({
-            startAngle: 0,
-            setAngle: 0
+            startAngle,
+            setAngle,
+            angle,
+            debug: this.props.test
         })
     }
 
     componentDidMount() {
-        this.container.style.setProperty(`--dialRotation`, '0deg')
+        console.log('componentDidMount', this.state.angle);
+        
+        this.container.style.setProperty(`--dialRotation`, (this.state.angle) + 'deg')
+
     }
 
     shouldComponentUpdate({value, preventSelect}, nextState) {
 
-        if (this.state.selecting) return
+        if (this.state.selecting) return false;
 
         const oldValue = this.props.value;
 
@@ -32,11 +47,6 @@ export default class Dial extends Component {
 
     getNewAngle(event, callback) {
         getTouchAngle(event, (touchAngle) => {
-
-
-            console.log('getTouchAngle', touchAngle);
-
-
             const { grabAngle, setAngle } = this.state
             const angleDiff = touchAngle - grabAngle
             const angle = -1 * (setAngle + angleDiff)

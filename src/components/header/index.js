@@ -7,6 +7,7 @@ import { connect } from 'preact-redux';
 import * as actions from '../../actions'
 import reduce from '../../reducers';
 
+import { hslToCss } from '../../lib/hsl'
 
 const mapStateToProps = (state, ownProps) => {
 
@@ -26,13 +27,13 @@ class BaseHeader extends Component {
         const headerStyle = `
             background-image:
             radial-gradient(ellipse at center bottom, hsla(0,0%,13%,0) 0%, hsla(0,0%,13%,.5) 54%, hsla(0,0%,13%,.9)),
-            linear-gradient(to right, ${this.props.outerColor}, ${this.props.innerColor})`
+            linear-gradient(to right, ${hslToCss(this.props.outerColor)}, ${hslToCss(this.props.innerColor)})`
 
         return (
             <header class={style.header} style={headerStyle}>
                 <nav>
-                    <Link href="/">Time</Link>
-                    <Link href="/design">Design</Link>
+                    <Link href="/">time</Link>
+                    <Link href="/design">design</Link>
                 </nav>
             </header>
         );

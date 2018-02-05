@@ -43,7 +43,7 @@ export const calculateTouchAngle = function ({left, top, width, height, pageX, p
         angle = 360 + angle
     }
 
-    console.log('calculateTouchAngle', angle);
+    //console.log('calculateTouchAngle', angle);
 
 
     return angle
@@ -59,18 +59,21 @@ export const getTouchAngle = function (event, callback) {
     const { currentTarget, pageX, pageY } = event
     const { top, left, width, height } = currentTarget.getBoundingClientRect()
 
+    const offsetTop = top + window.scrollY
+    const offsetLeft = left + window.scrollX
+
     if (isTouchEvent(event)) {
         for (let touch of event.changedTouches) {
             const {pageX, pageY} = touch;
             let angle = calculateTouchAngle({
-                top, left, width, height, pageX, pageY
+                top: offsetTop, left: offsetLeft, width, height, pageX, pageY
             })
 
             callback(angle)
         }
     } else {
         let angle = calculateTouchAngle({
-            top, left, width, height, pageX, pageY
+            top: offsetTop, left: offsetLeft, width, height, pageX, pageY
         })
 
         callback(angle)
@@ -84,7 +87,6 @@ export const getTouchAngle = function (event, callback) {
  * @returns {Number}
  */
 export const rotateAngle90 = function (angle) {
-    console.log('rotateAngle90 in' , angle);
 
     if (angle < 0) {
         angle = 360 + angle;
@@ -98,8 +100,6 @@ export const rotateAngle90 = function (angle) {
     if (rotated < 0) {
         rotated = 360 + rotated
     }
-
-    console.log('rotateAngle90 out' , rotated);
 
     return Math.floor(rotated)
 }
@@ -123,8 +123,6 @@ export const rotateAngle90Back = function (angle) {
     if (rotated < 0) {
         rotated = 360 + rotated
     }
-
-    console.log('rotateAngle90 out' , rotated);
 
     return Math.floor(rotated)
 }
