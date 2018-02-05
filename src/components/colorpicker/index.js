@@ -46,12 +46,12 @@ export default class ColorPicker extends Component {
         this.updateColor()
     }
 
-    render(props, {hue}) {
+    render(props, {hue, saturation, luminosity}) {
         return (
             <div class={style['colorpicker']}>
                 <Spectrum hue={hue} onChange={e => this.onHueChange(e)} />
-                <Saturation hue={hue} onChange={e => this.onSaturationChange(e)} />
-                <Luminosity hue={hue} onChange={e => this.onLuminosityChange(e)} />
+                <Saturation hue={hue} value={saturation} onChange={e => this.onSaturationChange(e)} />
+                <Luminosity hue={hue} value={luminosity} onChange={e => this.onLuminosityChange(e)} />
             </div>
         );
     }

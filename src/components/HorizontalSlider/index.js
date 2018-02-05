@@ -9,7 +9,7 @@ export default class VerticalSlider extends Component {
     componentDidMount() {
         this.setLevel(this.percentToLevel(this.props.value))
     }
-    
+
     shouldComponentUpdate({value}, nextState) {
         if (this.state.selecting) return false
 
@@ -46,7 +46,11 @@ export default class VerticalSlider extends Component {
     setLevel (level) {
         if (level === this.state.level) return;
 
-        this.container.style.setProperty(`--slideLevel`, level + 'px')
+        if (this.props.customLevel) {
+            this.container.querySelector(`.${this.props.customLevel}`).style.setProperty(`--slideLevel`, level + 'px')
+        } else {
+            this.container.style.setProperty(`--slideLevel`, level + 'px')
+        }
 
         // TODO onresize
 
@@ -83,12 +87,14 @@ export default class VerticalSlider extends Component {
         })
     }
 
-    render({children}, state) {
-        //const gradient = `background-image: linear-gradient(hsl(${hue}, 100%, 50%), hsl(${hue}, 0%, 50%));`
-        //const level = `transform: translateY(${saturation}px);`
+    render(props, state) {
+        const className = [props.className, style['horizontal-slider']]
+
+        if (props.customLevel) className.push(style['horizontal-slider--custom-level'])
+
         return <div
                     ref={(element) => { this.container = element }}
-                    class={style['vertical-slider']}
+                    class={className.join(' ')}
                     onClick={e => this.clicked(e)}
                     onMouseDown={e => this.selectStart(e)}
                     onTouchStart={e => this.selectStart(e)}

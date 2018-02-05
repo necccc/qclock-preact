@@ -178,6 +178,8 @@
         padding-left: 160%;
         padding-right: 20%;
 
+        transform: translateY(var(--slideLevel));
+
         margin-top: -50%;
         top: 0;
         left: 0;
@@ -192,18 +194,6 @@
             rgba(255,255,255,0) 100%
         );
 
-        &::after,
-        &::after {
-            content: 'sat';
-            display: inline-block;
-            position: absolute;
-            left: 0;    
-
-            transform: translate(-130%, 50%);
-            color: white;
-            font-family: monospace;
-            font-size: 10px;
-        }
     }
 
     &__luminosity-level {
@@ -211,12 +201,6 @@
         right: 0;
     }
 
-    &__luminosity-level::after {
-        content: 'lum';
-        left: auto;
-        right: 0;
-        transform: translate(130%, 50%);
-    }
 }
 
 
