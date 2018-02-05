@@ -1,0 +1,24 @@
+.vertical-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    --slideLevel: 0px;
+
+    user-select: none;
+    cursor: ew-resize;
+    backface-visibility: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: 10;
+        height: 100%;
+        width: 1px;
+        top: 0;
+        left: 0;
+        transform: translateX(var(--slideLevel));
+
+        box-shadow: 1px 0 1px rgba(0,0,0,.5);
+        background: white;
+    }
+}

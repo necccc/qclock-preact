@@ -6,28 +6,48 @@ import reduce from '../../reducers';
 
 import  style from './style'
 import Dial from '../../components/Dial';
+import VerticalSlider from '../../components/VerticalSlider';
+import HorizontalSlider from '../../components/HorizontalSlider';
 
 export default class DialPage extends Component {
 
-    setDial(e) {
-        //console.log(e);
-
+    componentWillMount () {
+        this.setState({
+            val: 25
+        })
+    }
+    setVertical(e) {
+        this.setState({
+            val: e,
+            vertical: e
+        })
     }
 
-    render({outerColor, innerColor, time}, state) {
+    setHorizontal(e) {
+        this.setState({
+            val: e,
+            horizontal: e
+        })
+    }
+
+    render(props, {vertical, horizontal, val}) {
 
         const test = 'foo'
         return (
             <div class="page">
-                <div class={style['dial_test']} >
-                    <Dial onChange={e => this.setDial(e)} value={0} >
-                        <div class={style['dial_test-in']} ></div>
-                    </Dial>
+
+                <div class={style['vertical-slider-test']} >
+                    {vertical}
+                    <VerticalSlider onChange={e => this.setVertical(e)} value={val} >
+                        <div class={style['vertical-slider-test__in']} ></div>
+                    </VerticalSlider>
                 </div>
-                <div class={style['dial_test']} >
-                    <Dial onChange={e => this.setDial(e)} value={0} test={test} >
-                        <div class={style['dial_test-in']} ></div>
-                    </Dial>
+
+                <div class={style['horizontal-slider-test']} >
+                    {vertical, horizontal}
+                    <HorizontalSlider onChange={e => this.setHorizontal(e)} value={val} >
+                        <div class={style['horizontal-slider-test__in']} ></div>
+                    </HorizontalSlider>
                 </div>
             </div>
         );

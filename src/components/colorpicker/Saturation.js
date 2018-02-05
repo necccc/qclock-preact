@@ -1,8 +1,6 @@
 import { h, Component } from 'preact';
 import style from './style';
 
-import { getVerticalSliderLevel } from './tools'
-
 export default class Saturation extends Component {
 
     componentWillMount () {

@@ -29,7 +29,7 @@ export default class Dial extends Component {
         this.container.style.setProperty(`--dialRotation`, (this.state.angle) + 'deg')
     }
 
-    shouldComponentUpdate({value, preventSelect}, nextState) {
+    shouldComponentUpdate({value}, nextState) {
         if (this.state.selecting) return false
 
         const oldValue = this.props.value
