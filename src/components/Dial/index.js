@@ -1,7 +1,7 @@
-import { h, Component } from 'preact';
-import style from './style';
+import { h, Component } from 'preact'
+import style from './style'
 import { getTouchAngle, rotateAngle90, rotateAngle90Back } from './tools'
-import { fail } from 'assert';
+import { fail } from 'assert'
 
 export default class Dial extends Component {
 
@@ -20,26 +20,23 @@ export default class Dial extends Component {
             startAngle,
             setAngle,
             angle,
+            setAngle: -1 * angle,
             debug: this.props.test
         })
     }
 
     componentDidMount() {
-        console.log('componentDidMount', this.state.angle);
-        
         this.container.style.setProperty(`--dialRotation`, (this.state.angle) + 'deg')
-
     }
 
     shouldComponentUpdate({value, preventSelect}, nextState) {
+        if (this.state.selecting) return false
 
-        if (this.state.selecting) return false;
-
-        const oldValue = this.props.value;
+        const oldValue = this.props.value
 
         if (oldValue !== value) {
             this.setAngle(rotateAngle90Back(value))
-            return false;
+            return false
         }
 
         return true;
@@ -58,7 +55,7 @@ export default class Dial extends Component {
     }
 
     setAngle(angle) {
-        if (angle === this.state.angle) return;
+        if (angle === this.state.angle) return
 
         this.setState({
             angle

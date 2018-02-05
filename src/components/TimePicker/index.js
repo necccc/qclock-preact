@@ -6,6 +6,7 @@ import Dial from '../Dial'
 import * as actions from '../../actions'
 import reduce from '../../reducers';
 import style from './style';
+import { hslToCss } from '../../lib/hsl'
 import TimeInput from './TimeInput'
 
 const degreesToMinutes = (deg) => {
@@ -63,9 +64,8 @@ export default class TimePicker extends Component {
     }
 
     render({ outerColor, innerColor, time }, { minuteSelecting, hourSelecting }) {
-        const minuteColor = `background-image: radial-gradient(${outerColor} 10%, transparent 70%);`
-        const hourColor = `background-image: radial-gradient(${innerColor} 10%, transparent 70%);`
-
+        const minuteColor = `background-image: radial-gradient(${hslToCss(outerColor)} 10%, transparent 70%);`
+        const hourColor = `background-image: radial-gradient(${hslToCss(innerColor)} 10%, transparent 70%);`
         const minuteDial = minutesToDegrees(time.getMinutes())
         const hourDial = hoursToDegrees(time.getHours())
 
