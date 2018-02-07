@@ -5,18 +5,8 @@ import * as actions from '../../actions'
 import reduce from '../../reducers';
 import ColorPicker from '../../components/ColorPicker';
 
-const mapStateToProps = (state, ownProps) => {
-    const outerColor = state.outerColor
-    const innerColor = state.innerColor
-
-    return {
-        outerColor,
-        innerColor
-    }
-}
-
 @connect(reduce, actions)
-class D extends Component {
+export default class Design extends Component {
 
     setOuterColor (color) {
         this.props.setOuterColor(color)
@@ -35,7 +25,3 @@ class D extends Component {
         );
     }
 }
-
-
-const Design = connect(mapStateToProps)(D)
-export default Design

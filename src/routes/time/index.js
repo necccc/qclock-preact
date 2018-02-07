@@ -5,20 +5,8 @@ import * as actions from '../../actions'
 import reduce from '../../reducers';
 import TimePicker from '../../components/TimePicker';
 
-const mapStateToProps = (state, ownProps) => {
-    const outerColor = state.outerColor
-    const innerColor = state.innerColor
-    const time = state.time
-
-    return {
-        outerColor,
-        innerColor,
-        time
-    }
-}
-
 @connect(reduce, actions)
-class Time extends Component {
+export default class Time extends Component {
 
     setTime (time) {
         this.props.setTime(new Date(time))
@@ -32,5 +20,3 @@ class Time extends Component {
         );
     }
 }
-
-export default connect(mapStateToProps)(Time)
