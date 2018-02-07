@@ -25,7 +25,7 @@ export default class App extends Component {
                 <Router onChange={this.handleRoute}>
                     <Time path="/" />
                     <Design path="/design" />
-                    <DialPage path="/dial" />
+
                 </Router>
             </div>
         );

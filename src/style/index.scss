@@ -1,15 +1,16 @@
 @import './font.scss';
+@import './colors.scss';
 
 html, body {
     min-height: 100vh;
     width: 100%;
     padding: 0;
     margin: 0;
-    background: #222;
+    background: $dark-bg;
     font-family: sans-serif;
     font-weight: 400;
     font-size: 16px;
-    color: #ddd;
+    color: $ui-bright;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -37,7 +38,7 @@ html, body {
     font-size: 2.4rem;
     line-height: 4rem;
     font-weight: 400;
-    color: #FFF;
+    color: $ui-bright;
     font-family: 'Julius Sans One';
 }
 

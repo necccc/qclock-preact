@@ -1,3 +1,5 @@
+@import '../../style/colors.scss';
+
 .vertical-slider {
     position: absolute;
     width: 100%;
@@ -19,7 +21,7 @@
         transform: translateY(var(--slideLevel));
 
         box-shadow: 0 1px 1px rgba(0,0,0,.5);
-        background: white;
+        background: $ui-bright;
     }
 
     &--custom-level{

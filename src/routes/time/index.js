@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 @connect(reduce, actions)
-class T extends Component {
+class Time extends Component {
 
     setTime (time) {
         this.props.setTime(new Date(time))
@@ -33,5 +33,4 @@ class T extends Component {
     }
 }
 
-const Time = connect(mapStateToProps)(T)
-export default Time
+export default connect(mapStateToProps)(Time)

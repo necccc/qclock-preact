@@ -9,21 +9,9 @@ import reduce from '../../reducers';
 
 import { hslToCss } from '../../lib/hsl'
 
-const mapStateToProps = (state, ownProps) => {
-
-    const outerColor = state.outerColor;
-    const innerColor = state.innerColor;
-    const time = state.time
-
-    return {
-        outerColor,
-        innerColor,
-        time
-    }
-}
-
-class BaseHeader extends Component {
-    render() {
+@connect(reduce, actions)
+export default class Header extends Component {
+    render(props) {
         const headerStyle = `
             background-image:
             radial-gradient(ellipse at center bottom, hsla(0,0%,13%,0) 0%, hsla(0,0%,13%,.5) 54%, hsla(0,0%,13%,.9)),
@@ -39,7 +27,3 @@ class BaseHeader extends Component {
         );
     }
 }
-
-const Header = connect(mapStateToProps)(BaseHeader)
-
-export default Header

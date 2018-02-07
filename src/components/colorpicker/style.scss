@@ -1,3 +1,4 @@
+@import '../../style/colors.scss';
 
 .colorpicker {
     box-sizing: border-box;
@@ -25,7 +26,7 @@
         box-sizing: border-box;
         width: 80%;
         height: 80%;
-        background: #222;
+        background: $dark-bg;
         border-radius: 50%;
         content: '';
         cursor: normal;
@@ -83,7 +84,7 @@
                 box-sizing: border-box;
                 width: 80%;
                 height: 80%;
-                background: #222;
+                background: $dark-bg;
                 border-radius: 50%;
                 content: '';
                 cursor: normal;
@@ -116,7 +117,7 @@
                 &--primary {
                     width: 90%;
                     height: 1px;
-                    background: #fff;
+                    background: $ui-bright;
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -201,15 +202,4 @@
         right: 0;
     }
 
-}
-
-
-.dot,
-.dot2 {
-    z-index: 100;
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: white;
-    transform: translate(-50%, -50%);
 }
