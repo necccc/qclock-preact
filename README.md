@@ -1,4 +1,6 @@
-# {{ name }}
+# qclock/client-aurora
+
+Client for qclock build using preact/redux and preact-cli
 
 ## CLI Commands
 
