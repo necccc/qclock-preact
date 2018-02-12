@@ -10,19 +10,19 @@ import { hslToCss } from '../../lib/hsl';
 
 @connect(reduce, actions)
 export default class Header extends Component {
-	render(props) {
-		const headerStyle = `
+    render(props) {
+        const headerStyle = `
             background-image:
             radial-gradient(ellipse at center bottom, hsla(0,0%,13%,0) 0%, hsla(0,0%,13%,.5) 54%, hsla(0,0%,13%,.9)),
-            linear-gradient(to right, ${hslToCss(this.props.outerColor)}, ${hslToCss(this.props.innerColor)})`;
+            linear-gradient(to right, ${hslToCss(this.props.colors.outer)}, ${hslToCss(this.props.colors.inner)})`;
 
-		return (
-			<header class={style.header} style={headerStyle}>
-				<nav>
-					<Link href="/">time</Link>
-					<Link href="/design">design</Link>
-				</nav>
-			</header>
-		);
-	}
+        return (
+            <header class={style.header} style={headerStyle}>
+                <nav>
+                    <Link href="/">time</Link>
+                    <Link href="/design">design</Link>
+                </nav>
+            </header>
+        );
+    }
 }

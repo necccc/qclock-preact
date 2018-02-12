@@ -1,15 +1,18 @@
 {
   "private": true,
-  "name": "colorpicker",
-  "version": "0.0.0",
+  "name": "@qclock/client-aurora",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "preact build",
-    "serve": "preact build && preact serve",
-    "dev": "preact watch",
-    "lint": "eslint src"
+    "build": "npx preact build --service-worker=false",
+    "serve": "npx preact build && preact serve",
+    "dev": "npx preact watch",
+    "lint": "npx eslint src"
   },
+  "files": [
+    "build"
+  ],
   "eslintConfig": {
     "extends": "eslint-config-synacor"
   },
