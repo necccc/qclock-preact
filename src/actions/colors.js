@@ -1,19 +1,17 @@
-import * as config from '../config';
+import { API_PUT, API_GET } from '../middleware/api'
 
 const COLORS_API_URL = '/api/colors'
 
-
 export const SET_COLORS = 'SET_COLORS';
+export const PUT_COLORS_REQUEST = 'PUT_COLORS_REQUEST';
+export const PUT_COLORS_SUCCESS = 'PUT_COLORS_SUCCESS';
+export const PUT_COLORS_FAILURE = 'PUT_COLORS_FAILURE';
+export const GET_COLORS = 'GET_COLORS';
 export const GET_COLORS_REQUEST = 'GET_COLORS_REQUEST';
 export const GET_COLORS_SUCCESS = 'GET_COLORS_SUCCESS';
 export const GET_COLORS_FAILURE = 'GET_COLORS_FAILURE';
 
-export function setColors(colors) {
-    return {
-        type: SET_COLORS,
-        colors
-    };
-}
+
 
 export function getColorsRequest () {
     return {
@@ -38,12 +36,42 @@ export function getColorsFailure(error) {
 }
 
 export function getColors () {
-    return function (dispatch) {
-        dispatch(getColorsRequest())
+    return {
+        type: GET_COLORS,
+        [API_GET]: {
+            actions: [getColorsRequest, getColorsSuccess, getColorsFailure],
+            endPoint: COLORS_API_URL
+        }
+    }
+}
 
-        return fetch(config.API_HOST + COLORS_API_URL)
-            .then(response => response.json())
-            .then(json => dispatch(getColorsSuccess(json)))
-            .catch(error => dispatch(getColorsFailure(error)))
+export function putColorsRequest() {
+    return {
+        type: PUT_COLORS_REQUEST
+    };
+}
+
+export function putColorsSuccess() {
+    return {
+        type: PUT_COLORS_SUCCESS
+    };
+}
+
+export function putColorsFailure(error) {
+    console.error(error);
+    return {
+        type: PUT_COLORS_FAILURE
+    };
+}
+
+export function setColors(colors) {
+    return {
+            type: SET_COLORS,
+            colors,
+            [API_PUT]: {
+                dataKey: 'colors',
+                actions: [putColorsRequest, putColorsSuccess, putColorsFailure],
+                endPoint: COLORS_API_URL
+            }
     }
 }

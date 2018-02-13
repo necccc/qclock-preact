@@ -13,7 +13,7 @@ export default class Time extends Component {
     }
 
     render({ colors, time }, state) {
-        const dateTime = new Date(time)
+        const dateTime = new Date(time.value)
         return (
             <div class="page">
                 <TimePicker onChange={e => this.onChange(e)} time={dateTime} outerColor={colors.outer} innerColor={colors.inner} />

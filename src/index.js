@@ -7,6 +7,7 @@ import App from './components/app';
 import Server from './components/Server';
 
 import { createStore, applyMiddleware } from 'redux';
+import apiMiddleware from './middleware/api'
 
 import reducers from './reducers';
 import actions from './actions'
@@ -16,6 +17,7 @@ let store = createStore(
     reducers,
     applyMiddleware(
         thunkMiddleware,
+        apiMiddleware,
         loggerMiddleware
       )
 );
@@ -23,13 +25,12 @@ let store = createStore(
 Promise.all([
     store.dispatch(actions.getColors()),
     store.dispatch(actions.getTime())
-]).then(() => console.log(store.getState()))
+])
 
 export default function Main () {
     return (<div id="outer">
         <h1 id="Q">Q</h1>
         <Provider store={store}>
-
             <App />
         </Provider>
     </div>);
