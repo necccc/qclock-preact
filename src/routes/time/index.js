@@ -9,13 +9,14 @@ import TimePicker from '../../components/TimePicker';
 export default class Time extends Component {
 
     onChange (time) {
-        this.props.setTime(new Date(time));
+        this.props.setTime(+new Date(time));
     }
 
     render({ colors, time }, state) {
+        const dateTime = new Date(time)
         return (
             <div class="page">
-                <TimePicker onChange={e => this.onChange(e)} time={time} outerColor={colors.outer} innerColor={colors.inner} />
+                <TimePicker onChange={e => this.onChange(e)} time={dateTime} outerColor={colors.outer} innerColor={colors.inner} />
             </div>
         );
     }

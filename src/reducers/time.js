@@ -2,7 +2,7 @@ import {
     SET_TIME
 } from '../actions/time';
 
-const initialState = new Date()
+const initialState = +new Date()
 
 function time (state = initialState, action) {
 
