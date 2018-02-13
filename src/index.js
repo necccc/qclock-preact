@@ -4,10 +4,12 @@ import App from './components/app';
 import store from './store'
 import actions from './actions'
 
-Promise.all([
-    store.dispatch(actions.getColors()),
-    store.dispatch(actions.getTime())
-])
+if (typeof window !== 'undefined') {
+    Promise.all([
+        store.dispatch(actions.getColors()),
+        store.dispatch(actions.getTime())
+    ])
+}
 
 export default function Main () {
     return (<div id="outer">
