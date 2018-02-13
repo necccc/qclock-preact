@@ -1,26 +1,8 @@
 import './style';
-import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
-
 import { Provider } from 'preact-redux';
 import App from './components/app';
-import Server from './components/Server';
-
-import { createStore, applyMiddleware } from 'redux';
-import apiMiddleware from './middleware/api'
-
-import reducers from './reducers';
+import store from './store'
 import actions from './actions'
-
-const loggerMiddleware = createLogger()
-let store = createStore(
-    reducers,
-    applyMiddleware(
-        thunkMiddleware,
-        apiMiddleware,
-        loggerMiddleware
-      )
-);
 
 Promise.all([
     store.dispatch(actions.getColors()),
