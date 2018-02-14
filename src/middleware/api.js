@@ -26,7 +26,9 @@ export default store => next => action => {
         }
         const [ startRequest, success, failure ] = actions
 
-        next(startRequest())
+        if (startRequest) {
+            next(startRequest())
+        }
 
         clearTimeout(rateLimit)
         rateLimit = setTimeout(() => {
@@ -43,7 +45,9 @@ export default store => next => action => {
         const { endPoint, actions } = get
         const [ startRequest, success, failure ] = actions
 
-        next(startRequest())
+        if (startRequest) {
+            next(startRequest())
+        }
 
         const request = new Request(API_HOST + endPoint, { method: 'GET'})
 

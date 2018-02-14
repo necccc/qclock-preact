@@ -20,6 +20,7 @@ export default class Header extends Component {
             <header class={style.header} style={headerStyle}>
                 <nav>
                     <Link href="/">time</Link>
+                    <Link href="/dim">dim</Link>
                     <Link href="/design">design</Link>
                 </nav>
             </header>

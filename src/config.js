@@ -1,1 +1,5 @@
-export const API_HOST = 'http://0.0.0.0:9090'
+if (process.env.NODE_ENV === 'production') {
+
+} else {
+
+}

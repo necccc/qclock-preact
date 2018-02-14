@@ -68,7 +68,7 @@
         }
 
         &::after {
-            background: #151515;
+            background: $ui-bright;
             clip-path: circle(40% at 50% 50%);
         }
     }
