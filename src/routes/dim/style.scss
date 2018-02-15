@@ -1,6 +1,7 @@
 @import '../../style/colors.scss';
 
 .dim {
+    $dim: &;
     box-sizing: border-box;
     width: 50vw;
     height: 50vw;
@@ -16,103 +17,155 @@
         width: 90vw;
         height: 90vw;
     }
-}
-.dim-from,
-.dim-to,
-.dim-level {
-    position: absolute;
-    border: 0px solid $ui-bright;
-}
 
-.dim-from,
-.dim-to {
-    top: 50%;
-    transform: translateY(-50%);
-    height: calc(100% - 8rem);
-    width: 4rem;
-}
-
-.dim-from {
-    border-right-width: 1px;
-    left: 0;
-}
-
-.dim-to {
-    border-left-width: 1px;
-    right: 0;
-}
-
-.dim-level {
-    --dimLevelGradientAngle: 0deg;
-    border-top-width: 1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 8rem);
-    height: 4rem;
-    bottom: 0;
-    background-image: linear-gradient(var(--dimLevelGradientAngle), transparent 0%, $ui-bright 100%);
-}
-
-.dim-numeric {
-
-    position: absolute;
-    width: calc(100% - 9rem);
-    height: calc(100% - 9rem);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    grid-template-rows: 35%;
-    grid-template-columns: 35% 35%;
-    grid-column-gap: 20px;
-
-    input, span {
-        color: $ui-bright;
-        font-family: monospace;
-        opacity: .6;
-        font-size: 4em;
-
-        @media (max-width:480px) {
-            font-size: 2.8em;
-        }
-    }
-
-    input {
-        background-color: $dark-bg;
-        border: 1px solid $ui-bright;
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
-        padding: 0.5rem;
-        text-align: center;
-
-        &:first-child {
-            padding-right: 0;
-        }
-        &:last-child {
-            padding-left: 0;
-        }
-
-        &:focus {
-            opacity: 1;
-            outline: none;
-        }
-    }
-
-    span {
+    &-from,
+    &-to,
+    &-level {
         position: absolute;
-        text-align: center;
-        display: block;
-        font-family: sans-serif;
-        text-transform: uppercase;
-        height: 4%;
-        line-height: 1em;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: .7em;
+        border: 0px solid $ui-bright;
     }
+
+    &-from,
+    &-to {
+        top: 50%;
+        transform: translateY(-50%);
+        height: calc(100% - 8rem);
+        width: 4rem;
+    }
+
+    &-from {
+        border-right-width: 1px;
+        left: 0;
+
+        &__decoration {
+            right: 0;
+            #{$dim}-time__decoration-point {
+                right: 0;
+            }
+        }
+    }
+
+    &-to {
+        border-left-width: 1px;
+        right: 0;
+
+        &__decoration {
+            left: 0;
+            #{$dim}-time__decoration-point {
+                left: 0;
+            }
+        }
+    }
+
+    &-level {
+        --dimLevelGradientAngle: 0deg;
+        border-top-width: 1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 8rem);
+        height: 4rem;
+        bottom: 0;
+        background-image: linear-gradient(var(--dimLevelGradientAngle), transparent 47%, $ui-bright 100%);
+    }
+
+    &-time__decoration {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: .55rem;
+    }
+
+    &-numeric {
+        position: absolute;
+        width: calc(100% - 9rem);
+        height: calc(100% - 9rem);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        grid-template-rows: 35%;
+        grid-template-columns: 35% 35%;
+        grid-column-gap: 20px;
+
+        input, span {
+            color: $ui-bright;
+            font-family: monospace;
+            opacity: .6;
+            font-size: 4em;
+
+            @media (max-width:480px) {
+                font-size: 2.8em;
+            }
+        }
+
+        input {
+            background-color: $dark-bg;
+            border: 1px solid $ui-bright;
+            border-left: none;
+            border-right: none;
+            border-radius: 0;
+            padding: 0.5rem;
+            text-align: center;
+
+            &:first-child {
+                padding-right: 0;
+            }
+            &:last-child {
+                padding-left: 0;
+            }
+
+            &:focus {
+                opacity: 1;
+                outline: none;
+            }
+        }
+
+        span {
+            position: absolute;
+            text-align: center;
+            display: block;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            height: 4%;
+            line-height: 1em;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: .7em;
+        }
+    }
+
+    &-time__decoration-point {
+        position: absolute;
+        top: 0;
+        background: $ui-bright;
+        opacity: .8;
+        width: 35%;
+        height: 1px;
+
+        &:nth-child(1),
+        &:nth-child(5),
+        &:nth-child(9) {
+            opacity: 1;
+            width: 100%;
+        }
+        &:nth-child(3),
+        &:nth-child(7) {
+            opacity: .9;
+            width: 70%;
+        }
+
+        &:nth-child(9) { top: 100%; }
+        &:nth-child(5) { top: 50%; }
+        &:nth-child(3) { top: 25%; }
+        &:nth-child(7) { top: 75%; }
+        &:nth-child(2) { top: 12%; }
+        &:nth-child(4) { top: 37%; }
+        &:nth-child(6) { top: 62%; }
+        &:nth-child(8) { top: 87%; }
+    }
+
 }

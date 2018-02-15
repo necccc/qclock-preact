@@ -7,6 +7,18 @@ import reducers from '../../reducers';
 import VerticalSlider from '../../components/VerticalSlider';
 import HorizontalSlider from '../../components/HorizontalSlider';
 
+const decoration = (new Array(9)).fill(0)
+
+/**
+ *
+ *
+ * @param {any} radians
+ * @returns
+ */
+export function deg (radians) {
+    return radians * 180 / Math.PI;
+}
+
 @connect(reducers, actions)
 export default class Dim extends Component {
 
@@ -22,7 +34,9 @@ export default class Dim extends Component {
     }
 
     componentDidMount () {
-        this.dimLevelElement.style.setProperty(`--dimLevelGradientAngle`, '20deg');
+        const { width, height } = this.dimLevelElement.getBoundingClientRect();
+        const angle = deg(Math.atan(height / width))
+        this.dimLevelElement.style.setProperty(`--dimLevelGradientAngle`, `${angle}deg`);
     }
 
     update () {
@@ -70,6 +84,12 @@ export default class Dim extends Component {
                             onChange={e => this.fromChange(e)}
                             value={from}
                         >
+                            <div class={[style['dim-time__decoration'], style['dim-from__decoration']].join(' ')}>
+                                {decoration.map((z, i) => {
+                                    let classNames = [style['dim-time__decoration-point']]
+                                    return <div class={classNames.join(' ')}></div>
+                                })}
+                            </div>
                         </VerticalSlider>
                     </div>
                     <div class={style['dim-to']}>
@@ -78,6 +98,12 @@ export default class Dim extends Component {
                             onChange={e => this.toChange(e)}
                             value={to}
                         >
+                            <div class={[style['dim-time__decoration'], style['dim-to__decoration']].join(' ')}>
+                                {decoration.map((z, i) => {
+                                    let classNames = [style['dim-time__decoration-point']]
+                                    return <div class={classNames.join(' ')}></div>
+                                })}
+                            </div>
                         </VerticalSlider>
                     </div>
                     <div class={style['dim-numeric']}>
