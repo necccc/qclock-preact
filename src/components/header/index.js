@@ -10,6 +10,16 @@ import { hslToCss } from '../../lib/hsl';
 
 @connect(reduce, actions)
 export default class Header extends Component {
+
+    menuToggle(e) {
+        if (e.currentTarget.checked) {
+            document.querySelector('body').className += ' menu-open'
+        } else {
+            const cl = document.querySelector('body').className;
+            document.querySelector('body').className = cl.replace(' menu-open', '')
+        }
+    }
+
     render(props) {
         const headerStyle = `
             background-image:
@@ -18,10 +28,15 @@ export default class Header extends Component {
 
         return (
             <header class={style.header} style={headerStyle}>
+
                 <nav>
-                    <Link href="/">time</Link>
-                    <Link href="/dim">dim</Link>
-                    <Link href="/design">design</Link>
+                    <input type="checkbox" id="menu-open" onChange={e => this.menuToggle(e) } />
+                    <label for="menu-open"><span>menu</span></label>
+                    <ul>
+                        <li><Link href="/">time</Link></li>
+                        <li><Link href="/dim">dim</Link></li>
+                        <li><Link href="/design">design</Link></li>
+                    </ul>
                 </nav>
             </header>
         );

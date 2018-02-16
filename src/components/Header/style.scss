@@ -46,7 +46,6 @@
     display: inline-block;
     height: 4rem;
     line-height: 4rem;
-    padding: 0 1rem;
     min-width: 4rem;
     text-align: center;
     background: rgba(255,255,255,0);
@@ -56,6 +55,7 @@
     text-shadow: 0px 1px 9px hsla(0, 0%, 13%, .5);
 
     @media (max-width:480px) {
+        text-align: right;
         padding: 0 .5rem;
     }
 }
@@ -67,4 +67,132 @@
 
 .header nav a.active {
     background: rgba(0,0,0,0.4);
+}
+
+
+
+.header nav {
+
+    input {
+        display: none;
+    }
+
+    label {
+        display: none;
+        width: 6rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        z-index: 10;
+        overflow: hidden;
+
+        font-weight: 500;
+        height: 4rem;
+
+        span {
+            display: inline-block;
+            overflow: hidden;
+            width: 0px;
+            text-indent: -999px;
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 38%;
+            left: 70%;
+            width: 1px;
+            height: 1rem;
+            box-shadow: 0 0 1px $ui-bright;
+            display: block;
+            background-color: $ui-bright;
+            transition: transform ease-in-out .1s, opacity ease-in-out .08s;
+        }
+
+        &::before {
+            transform: translateY(-42%) rotate(30deg);
+        }
+
+        &::after {
+            transform: translateY(42%) rotate(-30deg);
+        }
+    }
+
+    @media (max-width: 480px) {
+        text-align: right;
+        height: 100%;
+        width: 100%;
+
+        label {
+            transition: transform .3s ease-in-out;
+            display: inline-block;
+        }
+        input:checked ~ label::before {
+            transform: translateY(-42%) rotate(-30deg);
+        }
+        input:checked ~ label::after {
+            transform: translateY(42%) rotate(30deg);
+        }
+        input:checked ~ label span {
+            opacity: 0;
+            transform: translateY(60%);
+        }
+
+
+        input:checked ~ label {
+            transform: translateX(12rem);
+        }
+    }
+
+    ul {
+        position: relative;
+        padding-top: 0rem;
+
+        display: block;
+        max-width: 60rem;
+        margin: 0 auto;
+
+        text-align: right;
+        line-height: 4rem;
+
+
+        @media (max-width:480px) {
+            padding: 4rem 1rem 0;
+            position: absolute;
+            top: 0;
+            right: -12rem;
+            z-index: 1;
+            background-color: #000;
+            overflow: hidden;
+            height: 100vh;
+            box-sizing: border-box;
+            max-width: 100%;
+            width: 12rem;
+        }
+
+        li {
+            display: inline-block;
+            padding: 0 1rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+            @media (max-width:480px) {
+                display: block;
+                text-align: right;
+                padding-right: 0;
+            }
+
+            a {
+                color: #fff;
+                text-decoration: none;
+                line-height: 4em;
+                display: inline-block;
+            }
+        }
+    }
+
 }

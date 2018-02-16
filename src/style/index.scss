@@ -55,3 +55,18 @@ html, body {
         padding-bottom: 6rem;
     }
 }
+
+#outer {
+    transition: transform .3s ease-in-out;
+    width: 100vw;
+
+
+}
+body.menu-open {
+    touch-action: none;
+    overflow: hidden;
+}
+
+.menu-open #outer {
+    transform: translateX(-12rem);
+}

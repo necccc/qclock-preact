@@ -18,9 +18,22 @@
         height: 90vw;
     }
 
+    &-toggle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 2rem);
+        z-index: 15;
+    }
+
     &-from,
     &-to,
     &-level {
+
+        &[disabled=true] {
+            opacity: .2;
+        }
+
         position: absolute;
         border: 0px solid $ui-bright;
     }
@@ -76,6 +89,11 @@
     }
 
     &-numeric {
+
+        &[disabled=true] {
+            opacity: .2;
+        }
+
         position: absolute;
         width: calc(100% - 9rem);
         height: calc(100% - 9rem);

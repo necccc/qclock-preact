@@ -9,7 +9,8 @@ const initialState = {
     isFetching: false,
     from: 21,
     to: 6,
-    level: 20
+    level: 20,
+    active: false
 }
 
 function colors (state = initialState, action) {
