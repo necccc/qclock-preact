@@ -7,7 +7,8 @@ import actions from './actions'
 if (typeof window !== 'undefined') {
     Promise.all([
         store.dispatch(actions.getColors()),
-        store.dispatch(actions.getTime())
+        store.dispatch(actions.getTime()),
+        store.dispatch(actions.getDim())
     ])
 }
 

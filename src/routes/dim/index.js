@@ -74,7 +74,7 @@ export default class Dim extends Component {
         return (
             <div class="page">
                 <div class={style['dim']}>
-                    <Toggle class={style['dim-toggle']} onChange={e => this.toggle(e)} />
+                    <Toggle class={style['dim-toggle']} value={active} onChange={e => this.toggle(e)} />
                     <DimFrom from={from} disabled={!active} onChange={e => this.fromChange(e)} />
                     <DimTo to={to} disabled={!active} onChange={e => this.toChange(e)} />
 

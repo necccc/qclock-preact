@@ -54,7 +54,7 @@ export function setDim(dim) {
             type: SET_DIM,
             dim,
             [API_PUT]: {
-                dataKey: 'colors',
+                dataKey: 'dim',
                 actions: [null, putDimSuccess, putDimFailure],
                 endPoint: DIM_API_URL
             }
