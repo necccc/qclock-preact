@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@qclock/client-aurora",
   "version": "1.0.0",
   "license": "MIT",
@@ -26,9 +25,7 @@
     "node-sass": "4.7.2",
     "preact-cli": "^2.0.1",
     "redux-logger": "3.0.6",
-    "sass-loader": "6.0.6"
-  },
-  "dependencies": {
+    "sass-loader": "6.0.6",
     "moment": "2.20.1",
     "preact": "^8.2.6",
     "preact-compat": "^3.17.0",
