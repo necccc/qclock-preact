@@ -1,4 +1,9 @@
-const API_HOST = 'http://0.0.0.0:9090'
+let location = ''
+if (typeof window !== "undefined") {
+    location = window.location.origin
+}
+
+const API_HOST = location
 
 const PUT_RATELIMIT = 30
 let rateLimit = 0
