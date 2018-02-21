@@ -4,9 +4,9 @@ if (typeof window !== "undefined") {
 }
 
 const API_HOST = location
+const PUT_RATELIMIT = 20
 
-const PUT_RATELIMIT = 30
-let rateLimit = 0
+let rateLimiter = 0
 
 export const API_GET = 'API_GET'
 export const API_PUT = 'API_PUT'
@@ -26,18 +26,23 @@ export default store => next => action => {
 
     if (put) {
         const { endPoint, actions, dataKey } = put
+        const [ startRequest, success, failure ] = actions
+
         const data = {
             [dataKey]: action[dataKey]
         }
-        const [ startRequest, success, failure ] = actions
 
         if (startRequest) {
             next(startRequest())
         }
 
-        clearTimeout(rateLimit)
-        rateLimit = setTimeout(() => {
-            const request = new Request(API_HOST + endPoint, { method: 'PUT', body: JSON.stringify(data) })
+        clearTimeout(rateLimiter)
+
+        rateLimiter = setTimeout(() => {
+            const url = API_HOST + endPoint
+            const options = { method: 'PUT', body: JSON.stringify(data) }
+            const request = new Request(url, options)
+
             apiCall(request)
                 .then(data => next(success(data)))
                 .catch(error => next(failure(error)))
@@ -54,7 +59,9 @@ export default store => next => action => {
             next(startRequest())
         }
 
-        const request = new Request(API_HOST + endPoint, { method: 'GET'})
+        const url = API_HOST + endPoint
+        const options = { method: 'GET'}
+        const request = new Request(url, options)
 
         return apiCall(request)
             .then(data => next(success(data)))
