@@ -1,12 +1,13 @@
-let location = ''
-if (typeof window !== "undefined") {
-    location = window.location.origin
-}
-
-const API_HOST = location
-const PUT_RATELIMIT = 20
+import {
+    API_HOST,
+    PUT_RATELIMIT
+} from '../config'
 
 let rateLimiter = 0
+
+console.log(API_HOST,
+    PUT_RATELIMIT);
+
 
 export const API_GET = 'API_GET'
 export const API_PUT = 'API_PUT'

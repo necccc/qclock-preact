@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "npx preact build --service-worker=false",
+    "build": "npx preact build --service-worker=false --template src/template.html",
     "serve": "npx preact build && preact serve",
-    "dev": "npx preact watch",
+    "dev": "npx preact watch --template src/template.html",
     "lint": "npx eslint src"
   },
   "files": [

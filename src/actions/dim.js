@@ -27,7 +27,7 @@ export function getDimFailure(error) {
 }
 
 export function getDim () {
-    return {
+    return {    
         type: GET_DIM,
         [API_GET]: {
             actions: [null, getDimSuccess, getDimFailure],
