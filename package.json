@@ -1,6 +1,6 @@
 {
   "name": "@qclock/client-aurora",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "license": "MIT",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
