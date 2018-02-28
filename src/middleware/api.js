@@ -5,10 +5,6 @@ import {
 
 let rateLimiter = 0
 
-console.log(API_HOST,
-    PUT_RATELIMIT);
-
-
 export const API_GET = 'API_GET'
 export const API_PUT = 'API_PUT'
 
@@ -37,9 +33,7 @@ export default store => next => action => {
             next(startRequest())
         }
 
-        clearTimeout(rateLimiter)
-
-        rateLimiter = setTimeout(() => {
+        const sendRequest = () => {
             const url = API_HOST + endPoint
             const options = { method: 'PUT', body: JSON.stringify(data) }
             const request = new Request(url, options)
@@ -47,9 +41,14 @@ export default store => next => action => {
             apiCall(request)
                 .then(data => next(success(data)))
                 .catch(error => next(failure(error)))
+        }
 
-        }, PUT_RATELIMIT)
-
+        if (PUT_RATELIMIT !== 0) {
+            clearTimeout(rateLimiter)
+            rateLimiter = setTimeout(sendRequest, PUT_RATELIMIT);
+        } else {
+            sendRequest()
+        }
     }
 
     if (get) {
