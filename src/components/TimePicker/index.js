@@ -14,66 +14,88 @@ const hoursToDegrees = (hours) => hours * (360 / 12);
 
 export default class TimePicker extends Component {
 
-    componentWillMount () {
-        this.setState({
-            time: this.props.time
-        });
-    }
+	componentWillMount () {
+		this.setState({
+			time: this.props.time,
+			meridiem: new Date(this.state.time).getHours() < 12 ? -1 : 1
+		});
+	}
 
-    onMinuteDial(deg){
-        const minutes = degreesToMinutes(deg);
-        const time = new Date(this.state.time);
+	onMinuteDial(deg){
+		const minutes = degreesToMinutes(deg);
+		const time = new Date(this.state.time);
 
-        time.setMinutes(minutes);
+		time.setMinutes(minutes);
 
-        this.setState({
-            time
-        });
+		this.setState({
+			time
+		});
 
-        this.props.onChange(time);
-    }
+		this.props.onChange(time);
+	}
 
-    onHourDial(deg) {
-        const hours = degreesToHours(deg);
-        const time = new Date(this.state.time);
+	onHourDial(deg) {
+		let hours = degreesToHours(deg);
+		const time = new Date(this.state.time);
+		let meridiem = this.state.meridiem;
 
-        time.setHours(hours);
+		const previousHour = time.getHours();
 
-        this.setState({
-            time
-        });
+		if ((previousHour === 0 && hours === 11) ||
+			(previousHour === 11 && hours === 0)) {
+			meridiem = 1
+		}
+		if ((previousHour === 12 && hours === 11) ||
+			(previousHour === 23 && hours === 0)) {
+			meridiem = -1
+		}
 
-        this.props.onChange(time);
-    }
+		if (meridiem > 0) {
+			hours = 12 + hours
+		}
 
-    onTimeChange(time) {
-        this.props.onChange(time);
-    }
+		time.setHours(hours);
 
-    render({ outerColor, innerColor, time }) {
-        const minuteColor = `background-image: radial-gradient(${hslToCss(outerColor)} 10%, transparent 70%);`;
-        const hourColor = `background-image: radial-gradient(${hslToCss(innerColor)} 10%, transparent 70%);`;
-        const minuteDial = minutesToDegrees(time.getMinutes());
-        const hourDial = hoursToDegrees(time.getHours());
+		this.setState({
+			time,
+			meridiem
+		});
 
-        return (
-            <div class={style['time-selector']}>
-                <TimeInput time={time} onChange={e => this.onTimeChange(e)} />
-                <Dial
-                    className={style['time-selector__minute']}
-                    value={minuteDial}
-                    onChange={e => this.onMinuteDial(e)}
-                >
-                    <div style={minuteColor} />
-                </Dial>
-                <Dial
-                    className={style['time-selector__hour']}
-                    value={hourDial}
-                    onChange={e => this.onHourDial(e)}
-                >
-                    <div style={hourColor} />
-                </Dial>
-            </div>
-        );
-    }
+		this.props.onChange(time);
+	}
+
+	onTimeChange(time) {
+		this.setState({
+			time,
+			meridiem: new Date(time).getHours() < 12 ? -1 : 1
+		});
+		this.props.onChange(time);
+	}
+
+	render({ outerColor, innerColor, time }) {
+		const minuteColor = `background-image: radial-gradient(${hslToCss(outerColor)} 10%, transparent 70%);`;
+		const hourColor = `background-image: radial-gradient(${hslToCss(innerColor)} 10%, transparent 70%);`;
+		const minuteDial = minutesToDegrees(time.getMinutes());
+		const hourDial = hoursToDegrees(time.getHours());
+
+		return (
+			<div class={style['time-selector']}>
+				<TimeInput time={time} onChange={e => this.onTimeChange(e)} />
+				<Dial
+					className={style['time-selector__minute']}
+					value={minuteDial}
+					onChange={e => this.onMinuteDial(e)}
+				>
+					<div style={minuteColor} />
+				</Dial>
+				<Dial
+					className={style['time-selector__hour']}
+					value={hourDial}
+					onChange={e => this.onHourDial(e)}
+				>
+					<div style={hourColor} />
+				</Dial>
+			</div>
+		);
+	}
 }
