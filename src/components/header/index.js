@@ -1,12 +1,12 @@
-import { h, Component } from 'preact';
-import { Link } from 'preact-router/match';
-import style from './style';
+import { h, Component } from 'preact'
+import { Link } from 'preact-router/match'
+import style from './style'
 
-import { connect } from 'preact-redux';
-import actions from '../../actions';
-import reduce from '../../reducers';
+import { connect } from 'preact-redux'
+import actions from '../../actions'
+import reduce from '../../reducers'
 
-import { hslToCss } from '../../lib/hsl';
+import { hslToCss } from '../../lib/hsl'
 
 @connect(reduce, actions)
 export default class Header extends Component {
@@ -15,14 +15,14 @@ export default class Header extends Component {
 		if (e.currentTarget.checked) {
 			document.querySelector('body').className += ' menu-open'
 		} else {
-			const cl = document.querySelector('body').className;
+			const cl = document.querySelector('body').className
 			document.querySelector('body').className = cl.replace(' menu-open', '')
 		}
 	}
 
 	onMenuClick(e) {
-		document.querySelector('#menu-open').checked = false;
-		const cl = document.querySelector('body').className;
+		document.querySelector('#menu-open').checked = false
+		const cl = document.querySelector('body').className
 			document.querySelector('body').className = cl.replace(' menu-open', '')
 	}
 
@@ -30,7 +30,7 @@ export default class Header extends Component {
 		const headerStyle = `
 			background-image:
 			radial-gradient(ellipse at center bottom, hsla(0,0%,13%,0) 0%, hsla(0,0%,13%,.5) 54%, hsla(0,0%,13%,.9)),
-			linear-gradient(to right, ${hslToCss(props.colors.outer)}, ${hslToCss(props.colors.inner)})`;
+			linear-gradient(to right, ${hslToCss(props.colors.outer)}, ${hslToCss(props.colors.inner)})`
 
 		return (
 			<header class={style.header} style={headerStyle}>
@@ -38,12 +38,13 @@ export default class Header extends Component {
 					<input type="checkbox" id="menu-open" onChange={e => this.menuToggle(e) } />
 					<label for="menu-open"><span>menu</span></label>
 					<ul>
-						<li ><Link href="/" onClick={e => this.onMenuClick(e)}>time</Link></li>
+						<li><Link href="/" onClick={e => this.onMenuClick(e)}>time</Link></li>
 						<li><Link href="/dim" onClick={e => this.onMenuClick(e)}>dim</Link></li>
 						<li><Link href="/design" onClick={e => this.onMenuClick(e)}>design</Link></li>
+						<li><Link href="/advanced" onClick={e => this.onMenuClick(e)}>advanced</Link></li>
 					</ul>
 				</nav>
 			</header>
-		);
+		)
 	}
 }
