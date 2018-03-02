@@ -43,7 +43,7 @@ export default class Dial extends Component {
 		getTouchAngle(event, (touchAngle) => {
 			const { grabAngle, setAngle } = this.state;
 			const angleDiff = touchAngle - grabAngle;
-			const angle = -1 * (setAngle + angleDiff);
+			const angle = (-1 * (setAngle + angleDiff)) % 360;
 
 			this.props.onChange(rotateAngle90(angle));
 
@@ -103,7 +103,7 @@ export default class Dial extends Component {
 			onTouchMove={e => this.selecting(e)}
 			onMouseUp={e => this.selectEnd(e)}
 			onTouchEnd={e => this.selectEnd(e)}
-		        >
+				>
 			{props.children}
 		</div>);
 
