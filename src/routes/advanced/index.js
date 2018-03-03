@@ -1,26 +1,26 @@
 import { h, Component } from 'preact'
 import { connect } from 'preact-redux'
-
+import style from './style'
 import * as actions from '../../actions/advanced'
 import reduce from '../../reducers'
+import Toggle from '../../components/Toggle'
 
 @connect(reduce, actions)
 export default class Advanced extends Component {
 
-	onSocket (event) {
-		console.log(event.currentTarget.checked);
-
+	onSocket (bool) {
 		this.props.setAdvanced({
-			useSocket: event.currentTarget.checked
+			useSocket: bool
 		})
 	}
 
-	render(props, state) {
+	render({ advanced }, state) {
+
 		return (
 			<div class="page">
-				<label for="UseSocket">
+				<label class={style['label-advanced']} for="UseSocket">
+					<Toggle class={style['toggle-advanced']} value={ advanced.useSocket } onChange={e => this.onSocket(e)} />
 					<span>Use realtime socket connection</span>
-					<input type="checkbox" id="UseSocket" onChange={e => this.onSocket(e)} />
 				</label>
 			</div>
 		)

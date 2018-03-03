@@ -1,0 +1,15 @@
+.label-advanced {
+	position: relative;
+	padding-left: 80px;
+	box-sizing: border-box;
+	max-width: 16rem;
+	align-self: start;
+	margin: 2rem 0;
+}
+
+.label-advanced .toggle-advanced {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}

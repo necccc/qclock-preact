@@ -5,18 +5,19 @@ import store from './store'
 import actions from './actions'
 
 if (typeof window !== 'undefined') {
-    Promise.all([
-        store.dispatch(actions.getColors()),
-        store.dispatch(actions.getTime()),
-        store.dispatch(actions.getDim())
-    ])
+	Promise.all([
+		store.dispatch(actions.getColors()),
+		store.dispatch(actions.getTime()),
+		store.dispatch(actions.getDim()),
+		store.dispatch(actions.getAdvanced())
+	])
 }
 
 export default function Main () {
-    return (<div id="outer">
-        <h1 id="Q">Q</h1>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </div>);
+	return (<div id="outer">
+		<h1 id="Q">Q</h1>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</div>);
 }

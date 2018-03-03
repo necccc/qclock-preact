@@ -6,18 +6,44 @@ import * as advanced from '../actions/advanced'
 export const API_PUT = 'API_PUT'
 
 let SOCKET_OPEN = false
-
+let SOCKET = null
 
 export default store => next => action => {
 
-	if (action.type === advanced.SET_ADVANCED && action.advanced.useSocket && !SOCKET_OPEN) {
+	const createSocket = () => {
+
+		const socket = new WebSocket('ws://0.0.0.0:8088')
+		socket.addEventListener('open', function (event) {
+			console.log('socket opened')
+		});
+		socket.addEventListener('close', function (event) {
+			SOCKET_OPEN = false
+			next(advanced.setAdvanced({
+				useSocket: false
+			}))
+		});
+		return socket
+	}
+
+	const closeSocket = (socket) => {
+		socket.close()
+	}
+
+	if (
+		(action.type === advanced.SET_ADVANCED && action.advanced.useSocket && !SOCKET_OPEN)
+		|| (action.type === advanced.GET_ADVANCED_SUCCESS && action.advanced.useSocket && !SOCKET_OPEN)
+	) {
 		console.log('TURN ON SOCKET');
 		SOCKET_OPEN = true
+		SOCKET = createSocket()
 	}
 
 	if (action.type === advanced.SET_ADVANCED && !action.advanced.useSocket && SOCKET_OPEN) {
 		console.log('TURN OFF SOCKET');
+		closeSocket(SOCKET)
 		SOCKET_OPEN = false
+		next(action)
+		return store.dispatch(action)
 	}
 
 	const put = action[API_PUT]
@@ -30,13 +56,10 @@ export default store => next => action => {
 			[dataKey]: action[dataKey]
 		}
 
-		const sendRequest = () => {
+		if (SOCKET.readyState === 1) {
 			console.log('WS SEND', data);
-
+			SOCKET.send(JSON.stringify(data))
 		}
-
-		sendRequest()
-
 	}
 
 	return next(action)
