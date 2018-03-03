@@ -1,5 +1,6 @@
 import {
-	API_HOST
+	API_HOST,
+	WS_PORT
 } from '../config'
 import * as advanced from '../actions/advanced'
 
@@ -12,7 +13,7 @@ export default store => next => action => {
 
 	const createSocket = () => {
 
-		const socket = new WebSocket('ws://0.0.0.0:8088')
+		const socket = new WebSocket(`ws://${API_HOST}:${WS_PORT}`)
 		socket.addEventListener('open', function (event) {
 			console.log('socket opened')
 		});

@@ -1,5 +1,5 @@
 import {
-	API_HOST,
+	API_ORIGIN,
 	PUT_RATELIMIT
 } from '../config'
 
@@ -35,7 +35,7 @@ export default store => next => action => {
 		}
 
 		const sendRequest = () => {
-			const url = API_HOST + endPoint
+			const url = API_ORIGIN + endPoint
 			const options = { method: 'PUT', body: JSON.stringify(data) }
 			const request = new Request(url, options)
 
@@ -60,7 +60,7 @@ export default store => next => action => {
 			next(startRequest())
 		}
 
-		const url = API_HOST + endPoint
+		const url = API_ORIGIN + endPoint
 		const options = { method: 'GET'}
 		const request = new Request(url, options)
 

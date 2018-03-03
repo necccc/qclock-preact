@@ -4,11 +4,14 @@ if (typeof window !== "undefined") {
 	QCLOCK = window.QCLOCK || {}
 }
 
-let location = ''
+let hostname = ''
+let protocol = ''
 if (typeof window !== "undefined") {
-	location = window.location.origin
+	hostname = window.location.hostname
+	protocol = window.location.protocol
 }
 
-export const API_HOST = 'http://0.0.0.0:9090'
-//export const API_HOST = QCLOCK.API_HOST || location
+export const API_HOST = QCLOCK.API_HOST || hostname
+export const API_ORIGIN = protocol + '//' + (QCLOCK.API_HOST || hostname)
+export const WS_PORT = QCLOCK.WS_PORT || 8088
 export const PUT_RATELIMIT = QCLOCK.PUT_RATELIMIT || 20
