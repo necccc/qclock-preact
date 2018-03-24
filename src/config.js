@@ -7,8 +7,7 @@ if (typeof window !== "undefined") {
 let hostname = ''
 let protocol = ''
 if (typeof window !== "undefined") {
-	//hostname = window.location.hostname
-	hostname = '0.0.0.0:9090'
+	hostname = window.location.hostname
 	protocol = window.location.protocol
 }
 
