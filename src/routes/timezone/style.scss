@@ -1,0 +1,44 @@
+@import '../../style/colors.scss';
+
+.timezone {
+
+	width: 16rem;
+
+	select {
+		width: 100%;
+		-webkit-appearance: none;
+		appearance: none;
+    	background: none;
+		color: #fff;
+
+		background-color: $dark-bg;
+		border: 1px solid $ui-bright;
+		border-left: none;
+		border-right: none;
+		border-radius: 0;
+		padding: 0.5rem;
+
+		color: $ui-bright;
+		opacity: .6;
+		font-size: 2em;
+		text-align: center;
+
+		@media (max-width:480px) {
+			font-size: 2em;
+		}
+
+		&:first-child {
+			border-top: none;
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		option {
+			text-align: center;
+		}
+
+	}
+
+}

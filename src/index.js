@@ -9,6 +9,7 @@ if (typeof window !== 'undefined') {
 		store.dispatch(actions.getColors()),
 		store.dispatch(actions.getTime()),
 		store.dispatch(actions.getDim()),
+		store.dispatch(actions.getTimezone()),
 		store.dispatch(actions.getAdvanced())
 	])
 }

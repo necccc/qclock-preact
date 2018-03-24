@@ -5,6 +5,7 @@ import Header from './Header'
 import Time from '../routes/time'
 import Design from '../routes/design'
 import Dim from '../routes/dim'
+import Timezone from '../routes/timezone'
 import Advanced from '../routes/advanced'
 
 export default class App extends Component {
@@ -25,6 +26,7 @@ export default class App extends Component {
 					<Time path="/" />
 					<Design path="/design" />
 					<Dim path="/dim" />
+					<Timezone path="/timezone" />
 					<Advanced path="/advanced" />
 				</Router>
 			</div>

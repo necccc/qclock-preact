@@ -41,6 +41,7 @@ export default class Header extends Component {
 						<li><Link href="/" onClick={e => this.onMenuClick(e)}>time</Link></li>
 						<li><Link href="/dim" onClick={e => this.onMenuClick(e)}>dim</Link></li>
 						<li><Link href="/design" onClick={e => this.onMenuClick(e)}>design</Link></li>
+						<li><Link href="/timezone" onClick={e => this.onMenuClick(e)}>timezone</Link></li>
 						<li><Link href="/advanced" onClick={e => this.onMenuClick(e)}>advanced</Link></li>
 					</ul>
 				</nav>

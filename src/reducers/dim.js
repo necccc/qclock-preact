@@ -13,7 +13,7 @@ const initialState = {
     active: false
 }
 
-function colors (state = initialState, action) {
+function dim (state = initialState, action) {
 
     switch (action.type) {
 
@@ -42,4 +42,4 @@ function colors (state = initialState, action) {
 
 }
 
-export default colors;
+export default dim;
